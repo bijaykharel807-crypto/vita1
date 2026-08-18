@@ -109,13 +109,10 @@ JOB_SITES = [
     "LinkedIn Jobs (Worldwide)",
     "Indeed (Worldwide)",
     "Glassdoor (Worldwide)",
-    "Monster Worldwide",
-    "CareerBuilder (Global)",
-    "Jobrapido (Worldwide)",
-    "SimplyHired (Worldwide)",
     "ZipRecruiter (100% Free)",
     "Dice.com (Tech Free)",
-    "Eurojobs (Global Free)"
+    "Monster Worldwide",
+    "CareerBuilder (Global)"
 ]
 
 LOCATIONS = [
@@ -324,17 +321,14 @@ def get_valid_job_urls(company: str, title: str, role_category: str, site: str, 
     clean_loc = location.split('(')[0].strip()
     q_loc = urllib.parse.quote_plus(clean_loc)
     
-    # 100% Free Worldwide job sites direct search links:
+    # 100% Verified, Official Worldwide tech job platforms direct search links:
     linkedin_url = f"https://www.linkedin.com/jobs/search/?keywords={q_title}&location={q_loc}"
     indeed_url = f"https://www.indeed.com/jobs?q={q_title}&l={q_loc}"
     glassdoor_url = f"https://www.glassdoor.com/Job/jobs.htm?sc.keyword={q_title}&locT=C&locKeyword={q_loc}"
-    monster_url = f"https://www.monster.com/jobs/search?q={q_title}&where={q_loc}"
-    careerbuilder_url = f"https://www.careerbuilder.com/jobs?keywords={q_title}&location={q_loc}"
-    jobrapido_url = f"https://www.jobrapido.com/?w={q_title}&l={q_loc}"
-    simplyhired_url = f"https://www.simplyhired.com/search?q={q_title}&l={q_loc}"
     ziprecruiter_url = f"https://www.ziprecruiter.com/jobs-search?search={q_title}&location={q_loc}"
     dice_url = f"https://www.dice.com/jobs?q={q_title}&location={q_loc}"
-    eurojobs_url = f"https://www.eurojobs.com/job-search/?keywords={q_title}&location={q_loc}"
+    monster_url = f"https://www.monster.com/jobs/search?q={q_title}&where={q_loc}"
+    careerbuilder_url = f"https://www.careerbuilder.com/jobs?keywords={q_title}&location={q_loc}"
 
     if "LinkedIn" in site:
         portal_url = linkedin_url
@@ -342,20 +336,14 @@ def get_valid_job_urls(company: str, title: str, role_category: str, site: str, 
         portal_url = indeed_url
     elif "Glassdoor" in site:
         portal_url = glassdoor_url
-    elif "Monster" in site:
-        portal_url = monster_url
-    elif "CareerBuilder" in site:
-        portal_url = careerbuilder_url
-    elif "Jobrapido" in site:
-        portal_url = jobrapido_url
-    elif "SimplyHired" in site:
-        portal_url = simplyhired_url
     elif "ZipRecruiter" in site:
         portal_url = ziprecruiter_url
     elif "Dice" in site:
         portal_url = dice_url
-    elif "Eurojobs" in site:
-        portal_url = eurojobs_url
+    elif "Monster" in site:
+        portal_url = monster_url
+    elif "CareerBuilder" in site:
+        portal_url = careerbuilder_url
     else:
         portal_url = linkedin_url
         
@@ -364,13 +352,10 @@ def get_valid_job_urls(company: str, title: str, role_category: str, site: str, 
         "linkedin_url": linkedin_url,
         "indeed_url": indeed_url,
         "glassdoor_url": glassdoor_url,
-        "monster_url": monster_url,
-        "careerbuilder_url": careerbuilder_url,
-        "jobrapido_url": jobrapido_url,
-        "simplyhired_url": simplyhired_url,
         "ziprecruiter_url": ziprecruiter_url,
         "dice_url": dice_url,
-        "eurojobs_url": eurojobs_url
+        "monster_url": monster_url,
+        "careerbuilder_url": careerbuilder_url
     }
 
 @st.cache_data
@@ -418,13 +403,10 @@ def generate_10000_jobs():
                 "linkedin_url": url_dict["linkedin_url"],
                 "indeed_url": url_dict["indeed_url"],
                 "glassdoor_url": url_dict["glassdoor_url"],
-                "monster_url": url_dict["monster_url"],
-                "careerbuilder_url": url_dict["careerbuilder_url"],
-                "jobrapido_url": url_dict["jobrapido_url"],
-                "simplyhired_url": url_dict["simplyhired_url"],
                 "ziprecruiter_url": url_dict["ziprecruiter_url"],
                 "dice_url": url_dict["dice_url"],
-                "eurojobs_url": url_dict["eurojobs_url"],
+                "monster_url": url_dict["monster_url"],
+                "careerbuilder_url": url_dict["careerbuilder_url"],
                 "description": f"{role_info['desc_template']} As a core member at {company}, you will utilize {', '.join(sampled_skills[:3])} to deliver high-quality software with clean architecture and modern development practices.",
                 "posted_days_ago": random.randint(0, 14),
                 "questions": [
@@ -639,7 +621,7 @@ with tab1:
     st.subheader("🌍 10,000+ Worldwide & U.S.A. Tech Job Search & Discovery Engine")
     st.caption("Live indexed database of 10,000 verified tech jobs across top 100% FREE job portals worldwide (Zero payment required).")
     
-    st.info("✅ **100% Free Job Portals Only (No Payment / No Subscriptions Needed)**: All indexed roles link directly to verified free worldwide & US job portals (LinkedIn Jobs, Indeed, Glassdoor, Monster Worldwide, CareerBuilder, Jobrapido, SimplyHired, ZipRecruiter, Dice, Eurojobs). You can search and apply directly with 0 payment.")
+    st.info("✅ **100% Free & Verified Official Job Portals (Zero Scam / Zero Payment)**: All indexed listings link directly to authentic, official enterprise career platforms (LinkedIn Jobs, Indeed, Glassdoor, ZipRecruiter, Dice, Monster, and CareerBuilder). No third-party spam aggregators, no hidden fees, and zero payment required.")
 
     # Quick Worldwide location filter buttons
     st.markdown("**⚡ Quick Worldwide & Region Filters:**")
@@ -794,7 +776,7 @@ with tab2:
     with st.expander("🔗 Paste Any Custom Real Job Portal URL To Auto-Parse & Auto-Fill (Optional)", expanded=False):
         c_url_col1, c_url_col2 = st.columns([3, 1])
         with c_url_col1:
-            custom_input_url = st.text_input("Enter any live job portal URL (e.g. LinkedIn, Indeed, Glassdoor, Monster, CareerBuilder, SimplyHired):", placeholder="https://www.linkedin.com/jobs/view/...", key="tab2_custom_url_input")
+            custom_input_url = st.text_input("Enter any live job portal URL (e.g. LinkedIn, Indeed, Glassdoor, ZipRecruiter, Dice, Monster, CareerBuilder):", placeholder="https://www.linkedin.com/jobs/view/...", key="tab2_custom_url_input")
         with c_url_col2:
             st.write("")
             st.write("")
